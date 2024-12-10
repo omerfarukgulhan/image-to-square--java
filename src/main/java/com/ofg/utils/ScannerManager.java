@@ -15,10 +15,3 @@ public class ScannerManager {
         return scanner.nextLine();
     }
 }
-
-//enters image
-//enters color
-//read image
-//resize the image to square
-//save the image
-
