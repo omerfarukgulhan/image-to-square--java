@@ -3,7 +3,7 @@ package com.ofg.utils;
 import java.io.File;
 
 public class FileManager {
-    public static File checkIfFileExists(String imagePath) {
+    public static File getFileToSquare(String imagePath) {
         File originalFile = new File(imagePath);
         if (!originalFile.exists()) {
             throw new RuntimeException("The file does not exist at the specified path.");
@@ -24,6 +24,15 @@ public class FileManager {
             throw new RuntimeException("The file does not have a extension.");
         }
         return fileName.substring(dotIndex);
+    }
+
+    public static String getBaseFileName(File originalFile) {
+        String fileName = originalFile.getName();
+        int dotIndex = fileName.lastIndexOf(".");
+        if (dotIndex <= 0) {
+            throw new RuntimeException("The file does not have a valid base name.");
+        }
+        return fileName.substring(0, dotIndex);
     }
 
     public static File createFolderToSaveImage() {
