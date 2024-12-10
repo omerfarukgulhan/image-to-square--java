@@ -11,14 +11,14 @@ public class Main {
         try {
             String imagePath = ScannerManager.getImagePath();
             String squareColor = ScannerManager.getSquareColor();
-            File originalFile = FileManager.checkIfFileExists(imagePath);
+            File originalFile = FileManager.getFileToSquare(imagePath);
             String fileExtension = FileManager.getFileExtension(originalFile);
-            String fileNameWithoutExtension = originalFile.getName().replace("." + fileExtension, "");
-            String newImageName = fileNameWithoutExtension + "-squared." + fileExtension;
-            File newFolder = FileManager.createFolderToSaveImage();
-            File newFile = new File(newFolder, newImageName + fileExtension);
+            String newImageName = FileManager.getBaseFileName(originalFile) + "-squared" + "-" + squareColor;
+            File outputFolder = FileManager.createFolderToSaveImage();
+            File newFile = new File(outputFolder, newImageName + fileExtension);
             FileManager.checkIfFileExists(newFile);
-            ImageManager.saveImage(originalFile, newFile);
+            ImageManager.addBarsToImage(originalFile, newFile, squareColor);
+            System.out.println("Image successfully squared and saved to: " + newFile.getAbsolutePath());
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
